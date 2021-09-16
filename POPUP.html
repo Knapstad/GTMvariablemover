@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+    body {
+        height: auto;
+        width: 300px;
+    }
+hr{
+    margin-bottom: 10px;
+}
+h1{
+    margin: 0px;
+}
+label {
+        font-family: arial;
+        font-size: 1rem
+    }
+    .toggle {
+    cursor: pointer;
+    display: inline-block;
+    }
+    .toggle-switch {
+        display: inline-block;
+        background: #ccc;
+        border-radius: 16px;
+        width: 37px;
+        height: 24px;
+        position: relative;
+        vertical-align: middle;
+        transition: background 0.25s;
+    }
+    .toggle-switch:before, .toggle-switch:after {
+        content: "";
+    }
+    .toggle-switch:before {
+        display: block;
+        background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+        border-radius: 50%;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        transition: left 0.25s;
+    }
+    .toggle:hover .toggle-switch:before {
+        background: linear-gradient(to bottom, #fff 0%, #fff 100%);
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+    }
+    .toggle-checkbox:checked + .toggle-switch {
+        background: #56c080;
+    }
+    .toggle-checkbox:checked + .toggle-switch:before {
+        left: 16px;
+    }
+    .toggle-checkbox {
+        position: absolute;
+        visibility: hidden;
+    }
+    .toggle-label {
+        margin-left: 5px;
+        position: relative;
+        top: 2px;
+    }
+    form{
+        justify-content: top;
+        padding-left: 5px;
+        margin-bottom: 10px;
+    }
+    .wrapper{
+        display: flex;
+        flex-direction: column;
+    }
+    a{
+        align-self: center;
+        bottom: 2px;
+        color: #56c080;}
+    hr{
+        width: 100%;
+    }
+
+    @media (prefers-color-scheme: dark) {
+    body{
+        background-color: #2f2f2f;
+        color: white;
+    }
+}
+ 
+    
+    </style>
+  </head>
+<body>
+<div class="wrapper">
+    <h1>Settings for GTM Variable Mover</h1>
+    <hr>
+    <form id="optionsForm">
+        <label for="save" class="toggle">
+            <input id="save" class="toggle-checkbox" type="checkbox">
+            <div class="toggle-switch"></div>
+            Save on shortcut
+        </label>
+    </form>
+    <a href="https://knapstad.dev">Made by knapstad.dev</a>
+  <script type="text/javascript" src="popup.js"></script>
+</div>
+</body>
+</html>
