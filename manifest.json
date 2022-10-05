@@ -1,7 +1,7 @@
 {
     "name": "GTM variables move",
     "version": "0.0.0.8",
-    "description": "Moves Userdefined variables before builtinvariables in GTM variables view, so they are easier to find. Enables save on Crtl+s in GTM variables view and in marketing platform. Enables prewview tags on shortcut Ctrl+P in.",
+    "description": "Moves Userdefined variables before builtinvariables in GTM variables view. Enables save on Crtl+s in GTM variables view and in marketing platform. Enables prewview tags on shortcut Ctrl+P in.",
     "manifest_version": 3,
     "author": "Bendik Knapstad",
     
