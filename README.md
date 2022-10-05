@@ -1,4 +1,4 @@
-"# GTMvariablemover" 
+# GTM variable mover
 
 This is a personal extention for Chrome that fixes some annoyances I've had  firstly in GTM and later I've added some functionallity to Google marketing plattform.
 
