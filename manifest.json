@@ -1,22 +1,24 @@
 {
     "name": "GTM variables move",
-    "version": "0.0.0.6",
-    "description": "Moves Userdefined variables before builtinvariables in GTM variables view",
-    "manifest_version": 2,
+    "version": "0.0.0.8",
+    "description": "Moves Userdefined variables before builtinvariables in GTM variables view, so they are easier to find. Enables save on Crtl+s in GTM variables view and in marketing platform. Enables prewview tags on shortcut Ctrl+P in.",
+    "manifest_version": 3,
     "author": "Bendik Knapstad",
     
     "background": {
-        "scripts": ["background.js"]
+        "service_worker": "background.js"
     },
     "permissions": [
-        "https://tagmanager.google.com/*", "storage"],
-    "browser_action": {
+        "activeTab", "storage", "scripting","tabs"],
+    "action": {
       "default_popup": "popup.html"
     },
+    "host_permissions": [ "https://tagmanager.google.com/","https://marketingplatform.google.com/"],
     "content_scripts": [
         {
           "matches": [
-            "https://tagmanager.google.com/*"
+            "https://tagmanager.google.com/*",
+            "https://marketingplatform.google.com/*"
           ],
           "js": ["background.js"],
           "run_at": "document_end"

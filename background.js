@@ -8,8 +8,10 @@ const initStorageCache = getAllStorageSyncData().then(items => {
 
 chrome.storage.onChanged.addListener((changes, area) => {
     if (area === 'sync' && changes.options?.newValue) {
-        const save = Boolean(changes.options.newValue.save);
+        const save = Boolean(changes.options.newValue.save); 
+        const preview = Boolean(changes.options.newValue.preview); 
         storageCache.options.save = save;
+        storageCache.options.preview = preview;
     }
     });
 
@@ -63,24 +65,65 @@ function myfunc(){
             
         },500)
     }
-    onkeydown = function(e){
-        if(storageCache?.options?.save){
-            if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)){
-                e.preventDefault();
-                allSaveButtons=document.querySelectorAll("button[type='submit']:not([disabled])");
-                if(allSaveButtons){
-                    try{
-                        lastSaveButton=allSaveButtons[allSaveButtons.length-1];
-                        lastSaveButton.click();}
-                    catch(e){
+    if(document.location.href.includes("tagmanager.google")){
+        document.addEventListener('keydown', e => {
+            if(storageCache?.options?.save){
+                if (e.ctrlKey && e.key === 's'){
+                        e.preventDefault();
+                        allSaveButtons=document.querySelectorAll("button[type='submit']:not([disabled])");
+                        if(allSaveButtons){
+                            try{
+                                lastSaveButton=allSaveButtons[allSaveButtons.length-1];
+                                lastSaveButton.click();}
+                            catch(e){
+                            }
+                        }
+                    }
+                }
+            if(storageCache?.options?.preview){
+                if(e.ctrlKey && e.key == 'p'){
+                    e.preventDefault();
+                    preview=document.querySelector(".gtm-preview-button:not([disabled])");
+                    if(preview){
+                        try{
+                            preview.click();}
+                        catch(e){
+                            console.warn(e)
+                        }
                     }
                 }
             }
+        });}
+    if(document.location.href.includes("marketingplatform.google")){
+        document.addEventListener('keydown', e => {
+            if(storageCache?.options?.save){
+                if (e.ctrlKey && e.key === 's'){
+                        e.preventDefault();
+                        saveButton=document.querySelector("button[gtmtrigger='users-save-permissions']:not([disabled])");
+
+                        try{
+                            saveButton.click();}
+                            catch(e){
+                                console.warn(e);
+                            }
+                        }
+                    }
+        }
+        );}
     }
+
+try{
+    if(document.location.href.includes("marketingplatform.google" || "tagmanager.google")){
+        chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+            if (changeInfo.status === 'complete') {
+                chrome.scripting.executeScript({
+                    target: {tabId: tabId},
+                    func: myfunc
+                });
+
+            }
+        });
+    }
+}catch(e){
+
 }
-}
-
-
-
-window.onpopstate=function(){myfunc()};
-window.onload=function(){myfunc()};
